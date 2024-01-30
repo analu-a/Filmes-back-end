@@ -4,6 +4,20 @@
  * Autor: Ana Luiza                                  *
  * Versão: 1.0                                       *
 *****************************************************/
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  *
+ * Para realizar a conexão com o banco de dados precisamos utilizar uma dependencia *
+ *      -SEQUELIZE ORM                                                              *
+ *      -PRISMA ORM                                                                 *
+ *      -FASTFY ORM                                                                 *
+ * Para utilizar o prisma precisamos instalar as sseguinte dependencias             *
+ * npm install prisma --save                                                        *
+ *npm install @prisma/client --save                                                 *
+ *                                                                                  *
+ * Após a instalação do prisma, devemos rodar o comando abaixo para inicializar     *
+ * npx prisma init                                                                  * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */ 
+
 const express =  require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
