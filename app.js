@@ -36,6 +36,12 @@ app.use((request, response, next)=> {
 
 })
 
+/* **************************** Imports de arquivos e bibliotecas do projeto **********/
+
+const controllerFilmes = require('./controller/controller_filme')
+
+//************************************************************************************** 
+
 app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next){
     let listarFilmes = require('./controller/filmes_acme')
     let filmes = listarFilmes.getFilmes()
@@ -48,6 +54,20 @@ app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next)
         response.status(404)
     }
     
+})
+
+app.get('/v2/FilmesACME/filmes', cors(), async function(request, response,next){
+
+    //chama a função para retornar os dados do filmes
+    let dadosFilmes = await controllerFilmes.getListarfilmes()
+
+    if(dadosFilmes){
+        response.json(dadosFilmes)
+        response.status(200)
+    } else{
+        response.json({ERRO: "Desculpe, ocorreu algum problema"})
+        response.status(404)
+    }
 })
 
 app.get('/v1/FilmesACME/filmes/:id', cors(), async function(request, response, next){
