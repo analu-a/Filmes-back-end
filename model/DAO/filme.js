@@ -28,6 +28,8 @@ const deleteFilme = async function(id){
 
 }
 
+
+
 //Listar todos os filmes existentes na tabela
 const selectAllFilmes = async function(){
 
@@ -48,9 +50,24 @@ if(rsFilmes.length > 0){
 }
 }
 
+
 //Buscar filme existente buscando pelo ID
 const selectByIdFilme = async function(id){
 
+}
+
+const selectNameFilme = async function(filmeNome){
+   let nomeFilme = filmeNome
+
+    let filmeSql = 'select * from tbl_filme where nome like '%filmeNome%''
+
+    let resultFilmes = await prisma.$queryRawUnsafe(filmeSql)
+
+if(resultFilmes.length > 0){
+    return resulteFilmes
+} else{
+     return false
+}
 }
 
 module.exports ={
@@ -58,5 +75,6 @@ module.exports ={
     updateFilme,
     deleteFilme,
     selectAllFilmes,
-    selectByIdFilme
+    selectByIdFilme,
+    selectNameFilme
 }

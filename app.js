@@ -86,7 +86,25 @@ app.get('/v1/FilmesACME/filmes/:id', cors(), async function(request, response, n
     
 })
 
+// app.listen(8080, function(){
+//     console.log('API funcionando e aguardando requisições')
+
+// })
+
+app.get('/v2/FilmesACME/filmes/filtro', cors(), async function(request, response, next){
+    let nomeFilmes = request.query.nome
+
+    let procurarFilme = controllerFilmes.getNomeFilme(nomeFilmes)
+
+    if(procurarFilme){
+        response.json(procurarFilme)
+        response.status(200)
+    } else{
+        response.json({ERRO: "Algo deu errado"})
+        response.status(404)
+    }
+})
+
 app.listen(8080, function(){
     console.log('API funcionando e aguardando requisições')
-
 })
