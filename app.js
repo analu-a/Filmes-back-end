@@ -56,19 +56,7 @@ app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next)
     
 })
 
-app.get('/v2/FilmesACME/filmes', cors(), async function(request, response,next){
 
-    //chama a função para retornar os dados do filmes
-    let dadosFilmes = await controllerFilmes.getListarfilmes()
-
-    if(dadosFilmes){
-        response.json(dadosFilmes)
-        response.status(200)
-    } else{
-        response.json({ERRO: "Desculpe, ocorreu algum problema"})
-        response.status(404)
-    }
-})
 
 app.get('/v1/FilmesACME/filmes/:id', cors(), async function(request, response, next){
     let id_filmes = request.params.id
@@ -86,24 +74,42 @@ app.get('/v1/FilmesACME/filmes/:id', cors(), async function(request, response, n
     
 })
 
-// app.listen(8080, function(){
-//     console.log('API funcionando e aguardando requisições')
 
-// })
+app.get('/v2/FilmesACME/filmes', cors(), async function(request, response,next){
+
+    //chama a função para retornar os dados do filmes
+    let dadosFilmes = await controllerFilmes.getListarfilmes()
+
+        response.status(dadosFilmes.status_code)
+        response.json(dadosFilmes)
+        
+   
+})
+
+
+app.get('/v2/FilmesACME/filme/:id', cors(), async function(request, response, next){
+    //recebe o id da requisição do filme
+    let idFilme = request.params.id
+
+    let dadosFilme= await controllerFilmes.getBuscarFilme(idFilme)
+
+    response.status(dadosFilme.status_code)
+    response.json(dadosFilme)
+})
+
+
 
 app.get('/v2/FilmesACME/filmes/filtro', cors(), async function(request, response, next){
-    let nomeFilmes = request.query.nome
+    let filmeNome = request.query.nomeFilme
 
-    let procurarFilme = controllerFilmes.getNomeFilme(nomeFilmes)
+    let procurarFilme = await controllerFilmes.getNomeFilme(filmeNome)
 
-    if(procurarFilme){
+        response.status(procurarFilme.status_code)
         response.json(procurarFilme)
-        response.status(200)
-    } else{
-        response.json({ERRO: "Algo deu errado"})
-        response.status(404)
-    }
+        
+   
 })
+
 
 app.listen(8080, function(){
     console.log('API funcionando e aguardando requisições')
