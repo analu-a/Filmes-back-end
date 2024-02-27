@@ -51,7 +51,7 @@ app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next)
 
     if(filmes){
         response.json(filmes)
-        response(200)
+        response.status(200)
     } else{
         response.json({ERRO: "Desculpe, ocorreu algum problema"})
         response.status(404)
