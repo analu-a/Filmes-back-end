@@ -117,7 +117,7 @@ app.get('/v2/FilmesACME/filmes/filtro', cors(), async function(request, response
 
 //não esquecer de colocar o bodyParserJSON, porque é quem define o formato de chegada dos dados
 //obs: esse objeto foi criao no inicio do projeto
-app.post('/v2/FilmesACME/filme', cors, bodyParserJSON, async function(request, response, next){
+app.post('/v2/FilmesACME/filme', cors(), bodyParserJSON, async function(request, response, next){
 
     //recebe os dados encaminhados na requisição no body (JSON)
     let dadosBody = request.body

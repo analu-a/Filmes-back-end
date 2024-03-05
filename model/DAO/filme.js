@@ -18,7 +18,10 @@ const insertFilme = async function (dadosFilme) {
 try {
 
     let sql
-    if (dadosFilme.data_relancamento == null || dadosFilme.data_relancamento == "" || dadosFilme.data_relancamento == undefined) {
+    if (dadosFilme.data_relancamento == null || 
+        dadosFilme.data_relancamento == ""   || 
+        dadosFilme.data_relancamento == undefined
+        ){
 
         //Script sql para inserir novo filme
      sql = `insert into tbl_filme (
@@ -51,7 +54,7 @@ try {
             '${dadosFilme.nome}',
             '${dadosFilme.sinopse}',
             '${dadosFilme.data_lancamento}',
-             '${dadosFilme.data_relancamento}',
+            '${dadosFilme.data_relancamento}',
             '${dadosFilme.duracao}',
             '${dadosFilme.foto_capa}',
             '${dadosFilme.valor_unitario}'
@@ -95,7 +98,7 @@ const selectAllFilmes = async function () {
     try {
 
     // Script sql para listar todos os registros
-    let sql = 'select * from tbl_filme'
+    let sql = 'select * from tbl_filme order by id desc'
 
     //executa o script no db e recebe o retorno dos dados na variael rsFilmes
     let rsFilmes = await prisma.$queryRawUnsafe(sql)
@@ -134,9 +137,23 @@ const selectNameFilme = async function (filmeNome) {
     } catch (error) {
 
         return false
+    } 
+}
+
+const returnId = async function (){
+
+    try {
+
+        let sql = 'select last_insert_id() from tbl_filme limit 1'
+        let rsId = await prisma.$queryRawUnsafe(sql)
+        
+        return rsId
+
+    } catch (error) {
+        
+        return false
     }
   
-   
 }
 
 module.exports = {
