@@ -84,7 +84,15 @@ const updateFilme = async function (id) {
 
 //Deletar um filme existente filtrando pelo ID
 const deleteFilme = async function (id) {
+try {
+    let sql = `delete from tbl_filme where id = ${id}`
+    let rsFilme = await prisma.$executeRawUnsafe(sql)
 
+    return rsFilme
+
+} catch (error) {
+    return false
+}
 }
 
 
@@ -144,7 +152,7 @@ const returnId = async function (){
 
     try {
 
-        let sql = 'select last_insert_id() from tbl_filme limit 1'
+        let sql = 'select CAST(last_insert_id() AS DECIMAL) as id from tbl_filme limit 1'
         let rsId = await prisma.$queryRawUnsafe(sql)
         
         return rsId
@@ -162,5 +170,6 @@ module.exports = {
     deleteFilme,
     selectAllFilmes,
     selectByIdFilme,
-    selectNameFilme
+    selectNameFilme,
+    returnId
 }

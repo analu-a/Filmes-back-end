@@ -51,7 +51,7 @@ app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next)
 
     if(filmes){
         response.json(filmes)
-        response(200)
+        response.status(200)
     } else{
         response.json({ERRO: "Desculpe, ocorreu algum problema"})
         response.status(404)
@@ -119,11 +119,14 @@ app.get('/v2/FilmesACME/filmes/filtro', cors(), async function(request, response
 //obs: esse objeto foi criao no inicio do projeto
 app.post('/v2/FilmesACME/filme', cors(), bodyParserJSON, async function(request, response, next){
 
+    //recebe content-type da requisição (a API deve receber applicaion/json)
+    let contentType = request.headers['content-type']
+
     //recebe os dados encaminhados na requisição no body (JSON)
     let dadosBody = request.body
 
     //encainha os dados da requisição para a controller enviar para o db
-    let resultDados = await controllerFilmes.setInserirNovoFilme(dadosBody)
+    let resultDados = await controllerFilmes.setInserirNovoFilme(dadosBody, contentType)
 
     response.status(resultDados.status_code)
     response.json(resultDados)
