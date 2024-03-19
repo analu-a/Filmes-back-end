@@ -25,6 +25,8 @@ const SUCESS_CREATED_ITEM = {status: true, status_code: 201, message: 'Item cria
 
 const SUCESS_DELETED_ITEM = {status: true, status_code: 200, message: 'Item excluido com sucesso !!!'}
 
+const SUCESS_EDITED_ITEM = {status: true, status_code:200, message: 'Item editado com sucesso'}
+
 
 
 module.exports = {
@@ -35,5 +37,6 @@ module.exports = {
     SUCESS_CREATED_ITEM,
     ERROR_CONTENT_TYPE,
     ERROR_INTERNAL_SERVER,
-    SUCESS_DELETED_ITEM
+    SUCESS_DELETED_ITEM,
+    SUCESS_EDITED_ITEM
 }

@@ -79,7 +79,50 @@ try {
 
 //atualizar um filme existente filtrando pelo ID
 const updateFilme = async function (id) {
+    try {
 
+        let sql
+        if (dadosFilme.data_relancamento == null || 
+            dadosFilme.data_relancamento == ""   || 
+            dadosFilme.data_relancamento == undefined
+            ){
+    
+            //Script sql para inserir novo filme
+         sql = `update tbl_filme set 
+            nome =  '${dadosFilme.nome}',
+            sinopse = '${dadosFilme.sinopse}',
+            data_lancamento = '${dadosFilme.data_lancamento}',
+            data_relancamento = null,
+            duracao = '${dadosFilme.duracao}',
+            foto_capa = '${dadosFilme.foto_capa}',
+            valor_unitario =  '${dadosFilme.valor_unitario}'
+            where id = ${id}`
+           
+        } else {
+            sql = `update tbl_filme set 
+            nome = '${dadosFilme.nome}',
+            sinopse = '${dadosFilme.sinopse}',
+            data_lancamento = '${dadosFilme.data_lancamento}',
+            data_relancamento = '${dadosFilme.data_relancamento}',
+            duracao = '${dadosFilme.duracao}',
+            foto_capa = '${dadosFilme.foto_capa}',
+            valor_unitario =  '${dadosFilme.valor_unitario}'
+            where id = ${id}`
+           
+        }
+
+            let result = await prisma.$executeRawUnsafe(sql)
+        
+            if (result) {
+                return true
+            } else{
+                return false
+            }
+        } catch (error) {
+            return false
+        }
+        
+        
 }
 
 //Deletar um filme existente filtrando pelo ID
