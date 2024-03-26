@@ -147,7 +147,7 @@ app.put('/v2/FilmesACME/filme/:id', cors(), bodyParserJSON, async function(reque
 
     let dadosBody = request.body
 
-    let resultDados = await controllerFilmes.setAtualizarFilme(dadosBody, contentType, id_filme)
+    let resultDados = await controllerFilmes.setAtualizarFilme(id_filme, contentType,dadosBody)
 
     response.status(resultDados.status_code)
     response.json(resultDados)

@@ -78,7 +78,7 @@ try {
 }
 
 //atualizar um filme existente filtrando pelo ID
-const updateFilme = async function (id) {
+const updateFilme = async function (dadosFilme,id) {
     try {
 
         let sql
