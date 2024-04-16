@@ -43,6 +43,8 @@ const bodyParserJSON = bodyParser.json()
 
 const controllerFilmes = require('./controller/controller_filme')
 
+const controllerGeneros = require('./controller/controller_generos')
+
 //************************************************************************************** 
 
 app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next){
@@ -156,4 +158,24 @@ app.put('/v2/FilmesACME/filme/:id', cors(), bodyParserJSON, async function(reque
 
 app.listen(8080, function(){
     console.log('API funcionando e aguardando requisições')
+})
+
+/************************************************ Generos *****************************************/
+
+app.post('/v2/FilmesACME/genero', cors(), bodyParserJSON, async function(request, response, next){
+    let contentType = request.headers['content-type']
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerGeneros.setInserirNovoGenero(dadosBody, contentType)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+app.get('/v2/FilmesACME/generos', cors(), async function(request, response, next){
+    let allGeneros = await controllerGeneros.getListarGeneros()
+
+    response.status(allGeneros.status_code)
+    response.json(allGeneros)
 })

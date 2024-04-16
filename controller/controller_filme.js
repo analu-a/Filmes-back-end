@@ -85,10 +85,6 @@ const setInserirNovoFilme = async function (dadosFilme, contentType) {
 
 
 
-
-
-
-
 //Função para atualizar um filme existente
 const setAtualizarFilme = async function (id, contentType, dadosFilme) {
 

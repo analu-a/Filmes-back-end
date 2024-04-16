@@ -138,8 +138,6 @@ try {
 }
 }
 
-
-
 //Listar todos os filmes existentes na tabela
 const selectAllFilmes = async function () {
 
