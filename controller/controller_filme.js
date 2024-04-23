@@ -96,7 +96,7 @@ const setAtualizarFilme = async function (id, contentType, dadosFilme) {
             let idFilme = id
 
             if (idFilme == '' || idFilme == undefined || isNaN(idFilme)) {
-                 console.log(idFilme)
+
                 return message.ERROR_INVALID_ID
             } else {
                 let validaId = await filmesDAO.selectByIdFilme(idFilme)
@@ -145,7 +145,6 @@ const setAtualizarFilme = async function (id, contentType, dadosFilme) {
                                 resultDadosFilme.status_code = message.SUCESS_EDITED_ITEM.status_code
                                 resultDadosFilme.message = message.SUCESS_EDITED_ITEM.message
                                 resultDadosFilme.filme = dadosFilme
-                                console.log(resultDadosFilme)
                                 return resultDadosFilme //201
 
                             } else {
@@ -159,6 +158,8 @@ const setAtualizarFilme = async function (id, contentType, dadosFilme) {
                 }
             }
 
+        }else{
+            return message.ERROR_CONTENT_TYPE
         }
     }catch (error) {
         return message.ERROR_INTERNAL_SERVER

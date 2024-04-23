@@ -155,11 +155,6 @@ app.put('/v2/FilmesACME/filme/:id', cors(), bodyParserJSON, async function(reque
     response.json(resultDados)
 })
 
-
-app.listen(8080, function(){
-    console.log('API funcionando e aguardando requisições')
-})
-
 /************************************************ Generos *****************************************/
 
 app.post('/v2/FilmesACME/genero', cors(), bodyParserJSON, async function(request, response, next){
@@ -178,4 +173,30 @@ app.get('/v2/FilmesACME/generos', cors(), async function(request, response, next
 
     response.status(allGeneros.status_code)
     response.json(allGeneros)
+})
+
+app.delete('/v2/FilmesACME/genero/:id', cors(), async function(request, response, next){
+    let id_genero = request.params.id
+    let deleteGenero = await controllerGeneros.setExcluirGenero(id_genero)
+
+    response.status(deleteGenero.status_code)
+    response.json(deleteGenero)
+})
+
+app.put('/v2/FilmesACME/genero/:id', cors(), bodyParserJSON, async function(request, response,next){
+    let contentType = request.headers['content-type']
+    let id_genero = request.params.id
+
+    let dadosBody = request.body
+    
+
+    let resultDados = await controllerGeneros.setAtualizarGenero(id_genero, contentType, dadosBody)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+
+app.listen(8080, function(){
+    console.log('API funcionando e aguardando requisições')
 })

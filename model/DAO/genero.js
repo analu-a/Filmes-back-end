@@ -28,7 +28,7 @@ try {
 
 const deleteGenero = async function(id){
 try {
-    let sql = `delete from genero where id = ${id}`
+    let sql = `delete from genero where id_genero = ${id}`
     let rsGenero = await prisma.$executeRawUnsafe(sql)
 
     return rsGenero
@@ -51,15 +51,32 @@ try {
 }
 }
 
-const atualizarGenero = async function(){
+const atualizarGenero = async function(dadosGenero, id_genero){
+    try {
+    
+        let sql
+      sql = `update genero set 
+      genero = '${dadosGenero.genero}'
+      where id_genero = ${id_genero}`
 
+      let result = await prisma.$executeRawUnsafe(sql)
+
+      if (result) {
+        return true
+      } else {
+        return false
+      }
+        
+    } catch (error) {
+        return false
+    }
 }
 
 const returnId = async function (){
 
     try {
 
-        let sql = 'select CAST(last_insert_id() AS DECIMAL) as id from tbl_filme limit 1'
+        let sql = 'select CAST(last_insert_id() AS DECIMAL) as id from genero limit 1'
         let rsId = await prisma.$queryRawUnsafe(sql)
         
         return rsId
@@ -71,10 +88,25 @@ const returnId = async function (){
   
 }
 
+const selectByIdGenero = async function (id) {
+    try {
+        let sql = `select * from genero where id_genero = ${id}`
+    
+        let rsFilme = await prisma.$queryRawUnsafe(sql)
+        return rsFilme
+    
+    } catch (error) {
+        return false
+    }
+    
+       
+    }
+
 module.exports={
     inserirGenero,
     deleteGenero,
     selectAllGenero,
     atualizarGenero,
-    returnId
+    returnId,
+    selectByIdGenero
 }

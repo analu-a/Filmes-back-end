@@ -36,8 +36,34 @@ try {
 
 }
 
-const setExcluirGenero = async function(){
+const setExcluirGenero = async function(id){
+try {
 
+    let idGeneno = id
+
+    if (idGeneno == '' || idGeneno == undefined || isNaN(idGeneno)) {
+        return message.ERROR_INVALID_ID
+    } else {
+        let validaId = await generosDAO.selectByIdGenero(idGeneno)
+        if (validaId == false) {
+            return message.ERROR_NOT_FOUND //404
+        } else {
+            
+            let dadosGenero = await generosDAO.deleteGenero(idGeneno)
+
+            if (dadosGenero) {
+                
+                return message.SUCESS_DELETED_ITEM
+            } else {
+                return message.ERROR_INTERNAL_SERVER_DB
+            }
+        }
+    }
+    
+} catch (error) {
+    
+    return message.ERROR_INTERNAL_SERVER
+}
 }
 
 const getListarGeneros = async function(){
@@ -61,8 +87,60 @@ if (dadosGenero){
 }
 }
 
-const setAtualizarGenero = async function(){
+const setAtualizarGenero = async function(id, contentType, dadosGenero){
+try {
+console.log(id)
+console.log(contentType)
+console.log(dadosGenero)
+if (String(contentType).toLowerCase() == 'application/json') {
+    
+    let resultDadosGenero = {}
+    let id_genero = id
 
+    if (id_genero == '' || id_genero == undefined || isNaN(id_genero)) {
+        
+        return message.ERROR_INVALID_ID
+    } else {
+
+        let validaId = await generosDAO.selectByIdGenero(id_genero)
+
+        if (validaId == false) {
+            
+            return message.ERROR_NOT_FOUND
+        } else {
+
+            if (dadosGenero.genero == "" || dadosGenero.genero == undefined || dadosGenero.genero.length >30 ) {
+                
+                return message.ERROR_REQUIRED_FIELDS
+            } else {
+
+             let novoGenero = await generosDAO.atualizarGenero(dadosGenero, id_genero)
+
+             if (novoGenero) {
+                
+                resultDadosGenero.status = message.SUCESS_EDITED_ITEM.status
+                resultDadosGenero.status_code = message.SUCESS_EDITED_ITEM.status_code
+                resultDadosGenero.message = message.SUCESS_EDITED_ITEM.message
+                resultDadosGenero.genero = dadosGenero
+                console.log(resultDadosGenero)
+                return resultDadosGenero
+             } else {
+                return message.ERROR_INTERNAL_SERVER_DB
+            
+             }
+                
+            }
+            
+        }
+        
+    }
+} else{
+    return message.ERROR_CONTENT_TYPE
+}
+
+} catch (error) {
+    return message.ERROR_INTERNAL_SERVER
+}
 }
 
 module.exports = {
