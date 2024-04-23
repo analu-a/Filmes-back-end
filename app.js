@@ -45,6 +45,8 @@ const controllerFilmes = require('./controller/controller_filme')
 
 const controllerGeneros = require('./controller/controller_generos')
 
+const controllerClassificacao = require('./controller/controller_class')
+
 //************************************************************************************** 
 
 app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next){
@@ -200,3 +202,25 @@ app.put('/v2/FilmesACME/genero/:id', cors(), bodyParserJSON, async function(requ
 app.listen(8080, function(){
     console.log('API funcionando e aguardando requisições')
 })
+
+/************************************************ Classificação *****************************************/
+
+app.get('/v2/FilmesACME/classificacoes', cors(), async function(request,response,next){
+    let allClass = await controllerClassificacao.getListarClass()
+
+    response.status(allClass.status_code)
+    response.json(allClass)
+})
+
+app.post('/v2/FilmesACME/classificacao', cors(), bodyParserJSON, async function(request,response,next){
+    let contentType = request.headers['content-type']
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerClassificacao.setInserirNovaClass(contentType,dadosBody)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+app.delete('/v2/FilmesACME/classDelete/:id')

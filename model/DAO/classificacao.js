@@ -7,7 +7,7 @@ const selectAllClass = async function(){
 try {
     let sql = 'select * from classificacao order by id_classificacao desc'
 
-    let rsClass = await prisma.$executeRawUnsafe(sql)
+    let rsClass = await prisma.$queryRawUnsafe(sql)
     return rsClass
 
 } catch (error) {
@@ -15,12 +15,41 @@ try {
 }
 }
 
-const inserirClass = async function(){
+const inserirClass = async function(classificacao){
+try {
+    
+    let sql = `insert into classificacao(
+        idade,
+        foto_classificacao,
+        descricao,
+        motivo
+    ) values(
+        '${classificacao.idade}',
+        '${classificacao.foto_classificacao}',
+        '${classificacao.descricao}',
+        '${classificacao.motivo}'
+    )`
 
+    let result = await prisma.$executeRawUnsafe(sql)
+    if (result) {
+        return true
+    } else {
+        return false
+    }
+} catch (error) {
+    return false
+}
 }
 
-const deleteClass = async function(){
+const deleteClass = async function(id){
+try {
+    let sql = `delete from classificacao where id_classificacao = ${id}`
+    let rsClass = await prisma.$executeRawUnsafe(sql)
 
+    return rsClass
+} catch (error) {
+    return false
+}
 }
 
 const atualizarClass = async function(){
