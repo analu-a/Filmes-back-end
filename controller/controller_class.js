@@ -91,8 +91,46 @@ try {
 }
 }
 
-const setAtualizarClass = async function(){
+const setAtualizarClass = async function(id, contentType, dadosClass){
+try {
+    
 
+    if (String(contentType),toLowerCase() == 'application/json') {
+
+        let resultDadosClass = {}
+        let id_class = id
+        if (id_class == '' || id_class == undefined || isNaN(id_class)) {
+            return message.ERROR_INVALID_ID
+        } else {
+        let validaId = await classDAO.atualizarClass(id_class)
+
+        if (validaId == false) {
+            return message.ERROR_NOT_FOUND
+            
+        } else {
+            
+            //fazer validação
+
+            let novoGenero = await classDAO.atualizarClass(dadosClass, id_class)
+
+            if (novaClass) {
+                resultDadosClass.status = message.SUCESS_EDITED_ITEM
+                resultDadosClass.status_code = message.SUCESS_EDITED_ITEM
+                resultDadosClass.message = message.SUCESS_EDITED_ITEM.message
+                resultDadosClass.class = dadosClass
+                return resultDadosClass
+            } else {
+                return message.ERROR_INTERNAL_SERVER_DB
+            }
+        }
+    }
+
+}else{
+    message.ERROR_CONTENT_TYPE
+}
+} catch (error) {
+    return message.ERROR_INTERNAL_SERVER
+}
 }
 
 module.exports = {

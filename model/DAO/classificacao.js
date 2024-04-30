@@ -52,8 +52,27 @@ try {
 }
 }
 
-const atualizarClass = async function(){
+const atualizarClass = async function(dadosClass, id_classificacao){
+try {
+    let sql
+    sql = `update classificacao set 
+    idade = '${dadosClass.idade},
+    foto_classificacao = '${dadosClass.foto_classificacao},
+    descricao = '${dadosClass.descricao},
+    motivo = ${dadosClass.motivo}'
+    where id_classificacao = ${id_classificacao}`
 
+    let result = await prisma.$executeRawUnsafe(sql)
+
+    if (result) {
+        return true
+        
+    } else {
+        return false
+    }
+} catch (error) {
+    
+}
 }
 
 const returnId = async function (){

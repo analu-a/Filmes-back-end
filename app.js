@@ -223,4 +223,19 @@ app.post('/v2/FilmesACME/classificacao', cors(), bodyParserJSON, async function(
     response.json(resultDados)
 })
 
-app.delete('/v2/FilmesACME/classDelete/:id')
+app.delete('/v2/FilmesACME/classDelete/:id', cors(), async function(request, response, next){
+    let id_class = request.params.id
+    let deleteClass = await controllerClassificacao.setExcluirClass(id_class)
+
+    response.status(deleteClass.status_code)
+    response.json(deleteClass)
+})
+
+app.put('/v2/FilmesACME/editeClass/:id', cors(), bodyParserJSON, async function(request, response, next){
+    let id_class = request.params.id
+
+    let resultDados = await controllerClassificacao.setAtualizarClass(id_class, contentType,dadosBody)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
