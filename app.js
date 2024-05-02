@@ -236,6 +236,8 @@ app.delete('/v2/FilmesACME/classDelete/:id', cors(), async function(request, res
 })
 
 app.put('/v2/FilmesACME/editeClass/:id', cors(), bodyParserJSON, async function(request, response, next){
+    let contentType = request.headers['content-type']
+    let dadosBody = request.body
     let id_class = request.params.id
 
     let resultDados = await controllerClassificacao.setAtualizarClass(id_class, contentType,dadosBody)

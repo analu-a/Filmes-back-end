@@ -151,6 +151,7 @@ const selectAllFilmes = async function () {
 
     //executa o script no db e recebe o retorno dos dados na variael rsFilmes
     let rsFilmes = await prisma.$queryRawUnsafe(sql)
+
     return rsFilmes
 
     } catch (error) {

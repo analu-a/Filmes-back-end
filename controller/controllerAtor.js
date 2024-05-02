@@ -10,18 +10,16 @@ const setInserirNovoAtor = async function (dadosAtor, contentType) {
 
             let resultDadosAtor = {}
 
-            if (dadosAtor.nome == "" || dadosAtor.nome == undefined || dadosFilme.nome.length > 80 ||
-                dadosAtor.data_falecimento == "" || dadosAtor.data_falecimento == undefined || dadosAtor.data_falecimento.length > 8 ||
-                dadosAtor.pais == "" || dadosAtor.pais == undefined || dadosAtor.pais.length > 80 ||
-                dadosAtor.irmaos == "" || dadosAtor.irmaos == undefined || dadosAtor.irmaos.length > 80 ||
-                dadosAtor.foto == "" || dadosAtor.foto == undefined || dadosAtor.foto.length > 200
+            if (dadosAtor.nome_ator == "" || dadosAtor.nome_ator == undefined || dadosFilme.nome_ator.length > 80 ||
+                dadosAtor.data_nascimento == "" || dadosAtor.data_nascimento == undefined || dadosAtor.data_nascimento.length > 8 ||
+                dadosAtor.foto_ator == "" || dadosAtor.foto_ator == undefined || dadosAtor.foto_ator.length > 200
                 
             ) {
 
                 return message.ERROR_REQUIRED_FIELDS //400 
 
             } else {
-
+                
                 let dadosValidated = false
 
                 if (dadosAtor.data_falecimento != null &&
@@ -34,15 +32,16 @@ const setInserirNovoAtor = async function (dadosAtor, contentType) {
                     dadosAtor.irmaos != undefined &&
                     dadosAtor.irmaos != ""
                 ) {
+                    
                     if (dadosAtor.data_falecimento.length != 8 ||
                         dadosAtor.pais.length != 80 ||
                         dadosAtor.irmaos.length != 80) {
-
-                        return message.ERROR_REQUIRED_FIELDS
+                            
+                            return message.ERROR_REQUIRED_FIELDS
+                        } else {
+                            dadosValidated = true 
+                        }
                     } else {
-                        dadosValidated = true 
-                    }
-                } else {
                     dadosValidated = true 
                 }
 
@@ -211,7 +210,7 @@ const getListarAtor = async function () {
         if (dadosAtores.length) {
             atoresJSON.atores = dadosAtores
             atoresJSON.quantidade = dadosAtores.length
-            atoresDAO.status_code = 200
+            atoresJSON.status_code = 200
 
             return atoresJSON //200
         } else {

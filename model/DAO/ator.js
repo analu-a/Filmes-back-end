@@ -18,14 +18,14 @@ const insertAtor = async function (dadosAtor) {
             pais,
             irmaos,
             data_nascimento,
-            foto
+            foto_ator
         ) values (
             '${dadosAtor.nome_ator}',
             null,
             '${dadosAtor.pais}',
              '${dadosAtor.irmaos}',
             '${dadosAtor.data_nascimento}',
-            '${dadosAtor.foto}'
+            '${dadosAtor.foto_ator}'
         )`
         } else {
             sql = `insert into atores (
@@ -34,14 +34,14 @@ const insertAtor = async function (dadosAtor) {
                 pais,
                 irmaos,
                 data_nascimento,
-                foto
+                foto_ator
             ) values (
                 '${dadosAtor.nome_ator}',
                 '${dadosAtor.data_falecimento}'
                 '${dadosAtor.pais}',
                  '${dadosAtor.irmaos}',
                 '${dadosAtor.data_nascimento}',
-                '${dadosAtor.foto}'
+                '${dadosAtor.foto_ator}'
             )`
         }
         if (dadosAtor.pais == null || 
@@ -56,14 +56,14 @@ const insertAtor = async function (dadosAtor) {
             pais,
             irmaos,
             data_nascimento,
-            foto
+            foto_ator
         ) values (
             '${dadosAtor.nome_ator}',
             '${dadosAtor.data_falecimento}'
             null,
              '${dadosAtor.irmaos}',
             '${dadosAtor.data_nascimento}',
-            '${dadosAtor.foto}'
+            '${dadosAtor.foto_ator}'
         )`
         } else {
             sql = `insert into atores (
@@ -72,14 +72,14 @@ const insertAtor = async function (dadosAtor) {
                 pais,
                 irmaos,
                 data_nascimento,
-                foto
+                foto_ator
             ) values (
                 '${dadosAtor.nome_ator}',
                 '${dadosAtor.data_falecimento}'
                 '${dadosAtor.pais}',
                 '${dadosAtor.irmaos}',
                 '${dadosAtor.data_nascimento}',
-                '${dadosAtor.foto}'
+                '${dadosAtor.foto_ator}'
             )`
         }
         if (dadosAtor.irmaos == null || 
@@ -94,14 +94,14 @@ const insertAtor = async function (dadosAtor) {
             pais,
             irmaos,
             data_nascimento,
-            foto
+            foto_ator
         ) values (
             '${dadosAtor.nome_ator}',
             '${dadosAtor.data_falecimento}'
             '${dadosAtor.pais}',
              null,
             '${dadosAtor.data_nascimento}',
-            '${dadosAtor.foto}'
+            '${dadosAtor.foto_ator}'
         )`
         } else {
             sql = `insert into atores (
@@ -110,14 +110,14 @@ const insertAtor = async function (dadosAtor) {
                 pais,
                 irmaos,
                 data_nascimento,
-                foto
+                foto_ator
             ) values (
                 '${dadosAtor.nome_ator}',
                 '${dadosAtor.data_falecimento}'
                 '${dadosAtor.pais}',
                 '${dadosAtor.irmaos}',
                 '${dadosAtor.data_nascimento}',
-                '${dadosAtor.foto}'
+                '${dadosAtor.foto_ator}'
             )`
         }
 
@@ -149,7 +149,7 @@ const updateAtor = async function (dadosAtor,id) {
                 pais = '${dadosAtor.pais}',
                 irmaos = '${dadosAtor.irmaos}',
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                
             } else {
@@ -159,7 +159,7 @@ const updateAtor = async function (dadosAtor,id) {
                 pais = '${dadosAtor.pais}',
                 irmaos = '${dadosAtor.irmaos}',
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                
             }
@@ -175,7 +175,7 @@ const updateAtor = async function (dadosAtor,id) {
                 null,
                 irmaos = '${dadosAtor.irmaos}',
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                
             } else {
@@ -185,7 +185,7 @@ const updateAtor = async function (dadosAtor,id) {
                 pais = '${dadosAtor.pais}',
                 irmaos = '${dadosAtor.irmaos}',
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                 
                
@@ -203,7 +203,7 @@ const updateAtor = async function (dadosAtor,id) {
                 pais = '${dadosAtor.pais}',
                 null,
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                
             } else {
@@ -213,7 +213,7 @@ const updateAtor = async function (dadosAtor,id) {
                 pais = '${dadosAtor.pais}',
                 irmaos = '${dadosAtor.irmaos}',
                 data_nascimento = '${dadosAtor.data_nascimento}',
-                foto = '${dadosAtor.foto}'
+                foto_ator = '${dadosAtor.foto_ator}'
                 where id_atores = ${id}`
                
             }

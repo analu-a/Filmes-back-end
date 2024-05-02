@@ -213,6 +213,7 @@ const getListarfilmes = async function () {
     // Chama a função do DAO para buscar dados no db
     let dadosFilmes = await filmesDAO.selectAllFilmes()
 
+
     // verifica se existem dados retornados do DAO
     if (dadosFilmes) {
 

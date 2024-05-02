@@ -52,8 +52,7 @@ try {
 }
 }
 
-const atualizarClass = async function(dadosClass, id_classificacao
-){
+const atualizarClass = async function(dadosClass, id_classificacao){
 try {
     let sql
     sql = `update classificacao set 

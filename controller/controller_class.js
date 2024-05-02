@@ -95,7 +95,7 @@ const setAtualizarClass = async function(id, contentType, dadosClass){
 try {
     
 
-    if (String(contentType),toLowerCase() == 'application/json') {
+    if (String(contentType).toLowerCase() == 'application/json') {
 
         let resultDadosClass = {}
         let id_class = id
@@ -111,11 +111,11 @@ try {
             
             //fazer validação
 
-            let novoGenero = await classDAO.atualizarClass(dadosClass, id_class)
+            let novaClass = await classDAO.atualizarClass(dadosClass, id_class)
 
             if (novaClass) {
-                resultDadosClass.status = message.SUCESS_EDITED_ITEM
-                resultDadosClass.status_code = message.SUCESS_EDITED_ITEM
+                resultDadosClass.status = message.SUCESS_EDITED_ITEM.status
+                resultDadosClass.status_code = message.SUCESS_EDITED_ITEM.status_code
                 resultDadosClass.message = message.SUCESS_EDITED_ITEM.message
                 resultDadosClass.class = dadosClass
                 return resultDadosClass
@@ -125,7 +125,7 @@ try {
         }
     }
 
-}else{
+} else{
     message.ERROR_CONTENT_TYPE
 }
 } catch (error) {
