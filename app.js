@@ -47,6 +47,10 @@ const controllerGeneros = require('./controller/controller_generos')
 
 const controllerClassificacao = require('./controller/controller_class')
 
+const controllerAtores = require('./controller/controllerAtor')
+
+const controllerDiretor = require('./controller/controllerDiretor')
+
 //************************************************************************************** 
 
 app.get('/v1/FilmesACME/filmes', cors(), async function(request, response, next){
@@ -239,3 +243,97 @@ app.put('/v2/FilmesACME/editeClass/:id', cors(), bodyParserJSON, async function(
     response.status(resultDados.status_code)
     response.json(resultDados)
 })
+
+
+/************************************************ Atores *****************************************/
+
+app.get('/v2/FilmesACME/atores', cors(), async function(request, response,next){
+
+    let dadosAtores = await controllerAtores.getListarAtor()
+
+        response.status(dadosAtores.status_code)
+        response.json(dadosAtores)
+        
+   
+})
+
+app.post('/v2/FilmesACME/ator', cors(), bodyParserJSON, async function(request, response, next){
+
+    let contentType = request.headers['content-type']
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerAtores.setInserirNovoAtor(dadosBody, contentType)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+app.delete('/v2/FilmesACME/deleteAtor/:id', cors(), async function(request, response, next){
+
+    let id_ator = request.params.id
+    let deleteAtor = await controllerAtores.setExcluirAtor(id_ator)
+
+    response.status(deleteAtor.status_code)
+    response.json(deleteAtor)
+})
+
+app.put('/v2/FilmesACME/editarAtor/:id', cors(), bodyParserJSON, async function(request, response, next){
+    let contentType = request.headers['content-type']
+    let id_ator = request.params.id
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerAtores.setAtualizarAtor(id_ator, contentType,dadosBody)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+
+/************************************************ Diretores *****************************************/
+app.get('/v2/FilmesACME/diretores', cors(), async function(request, response,next){
+
+    
+    let dadosDiretores = await controllerDiretor.getListarDiretor()
+
+        response.status(dadosDiretores.status_code)
+        response.json(dadosDiretores)
+        
+   
+})
+
+app.post('/v2/FilmesACME/diretor', cors(), bodyParserJSON, async function(request, response, next){
+
+    let contentType = request.headers['content-type']
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerDiretor.setInserirNovoDiretor(dadosBody, contentType)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+app.delete('/v2/FilmesACME/deleteDiretor/:id', cors(), async function(request, response, next){
+
+    let id_diretor = request.params.id
+    let deleteDiretor = await controllerDiretor.setExcluirDiretor(id_diretor)
+
+    response.status(deleteDiretor.status_code)
+    response.json(deleteDiretor)
+})
+
+app.put('/v2/FilmesACME/editarDiretor/:id', cors(), bodyParserJSON, async function(request, response, next){
+    let contentType = request.headers['content-type']
+    let id_diretor = request.params.id
+
+    let dadosBody = request.body
+
+    let resultDados = await controllerDiretor.setAtualizarDiretor(id_diretor, contentType,dadosBody)
+
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+})
+
+
